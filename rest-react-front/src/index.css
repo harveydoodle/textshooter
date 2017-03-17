@@ -1,5 +1,81 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.game {
+  width: 550px;
+  height: 700px;
+  margin-left: 35%;
+  background: darkslategrey;
+  position: fixed;
+  font-size: 30px;
+}
+.set {
+  position: absolute;
+  color: white;
+  animation: expand 5s linear;
+}
+.position0{
+  margin-left: 50px;
+  margin-top: -40px;
+  animation-delay: 1s;
+ }
+ .position1{
+  margin-left: 180px;
+  margin-top: -40px;
+  animation-delay: 3s;
+ }
+ .position2{
+  margin-left: 300px;
+  margin-top: -40px;
+ }
+ .position3{
+  margin-left: 420px;
+  margin-top: -40px;
+  animation-delay: 7s;
+ }
+ .position4{
+  margin-left: 180px;
+  margin-top: -40px;
+  animation-delay: 9s;
+ }
+ .position5{
+  margin-left: 300px;
+  margin-top: -40px;
+  animation-delay: 11s;
+ }
+ .position6{
+  margin-left: 420px;
+  margin-top: -40px;
+  animation-delay: 13s;
+ }
+ .position7{
+  margin-left: 180px;
+  margin-top: -40px;
+  animation-delay: 15s;
+ }
+ .position8{
+  margin-left: 300px;
+  margin-top: -40px;
+  animation-delay: 17s;
+ }
+ .position9{
+  margin-left: 420px;
+  margin-top: -40px;
+  animation-delay: 19s;
+ }
+ .circle{
+   border-radius: 100px;
+   background: black;
+   width: 15px;
+   height: 15px;
+   bottom: -7.5px;
+   /*left: 265px;*/
+   position: absolute;
+ }
+@keyframes expand{
+    0%{
+      margin-top:0px;
+      margin-bottom:500px;
+    }
+    100%{
+      margin-top:500px;
+      margin-bottom:0px;
+    }
 }
