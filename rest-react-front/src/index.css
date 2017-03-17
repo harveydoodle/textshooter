@@ -9,7 +9,6 @@
 .set {
   position: absolute;
   color: white;
-  animation: expand 5s linear;
 }
 .position0{
   margin-left: 50px;
@@ -24,6 +23,7 @@
  .position2{
   margin-left: 300px;
   margin-top: -40px;
+  color: white;
  }
  .position3{
   margin-left: 420px;
@@ -66,7 +66,6 @@
    width: 15px;
    height: 15px;
    bottom: -7.5px;
-   /*left: 265px;*/
    position: absolute;
  }
 @keyframes expand{

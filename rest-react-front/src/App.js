@@ -20,7 +20,8 @@ class App extends Component {
                    'park', 
                    'harvey', 
                    'poop'], 
-      styles: [],
+      // styles: {animation: expand 5s linear},
+      opacity: [],
       position: {left:270}
     };
     this.detectWord = this.detectWord.bind(this);
@@ -28,7 +29,7 @@ class App extends Component {
     // this.findCoordinates = this.findCoordinates.bind(this);
 
     for (let i = 0; i < this.state.wordsArray.length; i++) {
-      this.state.styles.push({opacity:1});
+      this.state.opacity.push({opacity:1});
     }
   }
 
@@ -46,9 +47,9 @@ class App extends Component {
   // detects character user types on keyboard and concats its in state
   detectWord(e) {
     const array     = this.state.wordsArray;
-    const styles    = this.state.styles;
+    const opacity    = this.state.opacity;
     const newOp     = {opacity:0};
-    const newArray  = this.state.styles; // resets each time
+    const newArray  = this.state.opacity; // resets each time
     const c         = String.fromCharCode(e.keyCode);
     
     this.typedWord  = (this.typedWord += c.toLowerCase());
@@ -57,7 +58,7 @@ class App extends Component {
     if (match > -1) {
       newArray.splice(match, 1, newOp);
       this.setState({
-        styles: newArray
+        opacity: newArray
       });
       this.typedWord = '';
       let refName = `word${match}`;
@@ -69,12 +70,14 @@ class App extends Component {
       this.setState({
         position: {left: (wordLocation.left-500)}
       });
+
+
     };
   }
 
   render() {
     let renderedArray = this.state.wordsArray.map((word, i)=>{
-      return <div ref={`word${i}`} key={i} className={`position${i} set`} style={this.state.styles[i]}> {word} </div>;
+      return <div ref={`word${i}`} key={i} className={`position${i} set`} style={this.state.opacity[i]}> {word} </div>;
     });
 
     return (<div className="game">
