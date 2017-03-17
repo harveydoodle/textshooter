@@ -3,10 +3,10 @@ const app = express();
 
 const PORT = (process.env.PORT || 7007);
 
-app.use(express.static('./rest-react-front/build'));
+app.use(express.static(__dirname + '/rest-react-front/build'));
 
 app.get('*', (req,res)=>{
-    res.sendFile('./rest-react-front/build/index.html')
+    res.sendFile(__dirname + '/rest-react-front/build/index.html')
 })
 
 app.listen(PORT, () =>{
