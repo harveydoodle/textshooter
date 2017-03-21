@@ -19,9 +19,8 @@
    width: 15px;
    height: 15px;
    position: relative;
-   top: 677.5px;
+   top: 670px;
    margin: 0 auto;
-   display: inline-block;
 }
 #animateWord0 {
   animation: expand 5s linear;
@@ -68,34 +67,34 @@
   margin-top: -40px;
 }
 .position0{
-  margin-left: 50px;
+  margin-left: 20%;
 }
  .position1{
-  margin-left: 180px;
+  margin-left: 40%;
 }
  .position2{
-  margin-left: 300px;
+  margin-left: 60%;
 }
  .position3{
-  margin-left: 420px;
+  margin-left: 80%;
 }
  .position4{
-  margin-left: 180px;
+  margin-left: 40%;
 }
  .position5{
-  margin-left: 300px;
+  margin-left: 60%;
 }
  .position6{
-  margin-left: 420px;
+  margin-left: 80%;
 }
  .position7{
-  margin-left: 180px;
+  margin-left: 40%;
 }
  .position8{
-  margin-left: 300px;
+  margin-left: 60%;
 }
  .position9{
-  margin-left: 420px;
+  margin-left: 80%;
 }
 @keyframes expand{
     0%{
@@ -103,7 +102,7 @@
       margin-bottom:500px;
     }
     100%{
-      margin-top:600px;
+      margin-top:500px;
       margin-bottom:0px;
     }
 }
