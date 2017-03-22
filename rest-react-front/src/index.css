@@ -1,9 +1,49 @@
 body {
   margin-top:10px;
+  background: linear-gradient(33deg, #ff4242, #fdcf5d, #ff76ca);
+  background-size: 600% 600%;
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 78%}
+    50%{background-position:100% 23%}
+    100%{background-position:0% 78%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 78%}
+    50%{background-position:100% 23%}
+    100%{background-position:0% 78%}
+}
+@keyframes AnimationName { 
+    0%{background-position:0% 78%}
+    50%{background-position:100% 23%}
+    100%{background-position:0% 78%}
+}
+header {
+  position:fixed;
+  top:0;
+  left:0;
+  background: #CCC;
+  width: 100vw;
+  height: 60px;
+  text-align: center;
+  z-index: 1;
+
+  background: linear-gradient(33deg, #ff4242, #fdcf5d, #ff76ca);
+  background-size: 600% 600%;
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
 }
 .screen {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .noShow{
   opacity:0;
@@ -11,18 +51,22 @@ body {
 .game {
   width:600px;
   height: 980px;
-  background: mediumpurple;
-  /*position: fixed;*/
+  background: lightpink;
   font-size: 30px;
-  border-radius: 30px;
+  border-radius: 40px;
+  margin: 50px;
+  overflow: hidden;
 }
 .scoreboard {
-  background: gold;
-  width: 300px;
+  border-radius: 10px;
+  background: lavender;
+  width: 200px;
+  height: 500px;
   padding: 50px;
   margin: 50px;
 }
 .instructions {
+  border-radius: 10px;
   background: lightpink;
   width: 300px;
   padding: 50px;
@@ -31,7 +75,7 @@ body {
 .set {
   position: absolute;
   color: black;
-  margin-top: 60px;
+  margin-top: -60px;
 }
 #animateWord0 {
   animation: expand 5s linear;

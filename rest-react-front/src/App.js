@@ -18,7 +18,6 @@ class App extends Component {
       points: 0,
       counter: 0,
       winOpacity: 0,
-      loseOpacity: 0,
       levelComplete: false,
       level:0,
       timeCounter: 0
@@ -141,7 +140,7 @@ class App extends Component {
         top: newArray,
         bouncing: newAnim,
         animation: newFall,
-        points: this.state.points + this.state.wordsArray[match].length, 
+        points: this.state.points + this.state.wordsArray[match].length,
         counter: this.state.counter + 1
       });
     };
@@ -153,15 +152,14 @@ class App extends Component {
     });
 
     return (<div className="screen">
-              <div className="instructions">
+              {/*<div className="instructions">
                 <h1>{this.state.level}</h1>
-              </div>
-
+              </div>*/}
+              <header>hi</header>
               <div className="game">
                 {renderedArray}
                 <h1 className={this.state.winOpacity > 0 ? "animated bounceIn" : 'noShow'}>Next Level</h1>
                 <h1 className={this.state.finalOpacity > 0 ? "animated bounceIn" : 'noShow'}>HARVEY</h1>
-                <h1 className={this.state.loseOpacity > 0 ? "animated bounceIn" : 'noShow'}>score</h1>
               </div>
 
               <div className="scoreboard">
