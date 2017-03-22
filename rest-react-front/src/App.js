@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './App.css';
 import 'animate.css';
 
+console.log("Made by ANNIE :D :D :D :D :D @ linye.zhang18@gmail.com holla");
+
 // game display
 class App extends Component {
   constructor() {
