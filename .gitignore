@@ -7,7 +7,6 @@
 /coverage
 
 # production
-#/build #commented out by IANANANANA
 
 # misc
 .DS_Store
