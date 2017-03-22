@@ -1,30 +1,41 @@
-#root {
+body {
+  margin-top:10px;
+}
+.screen {
   display: flex;
   justify-content: center;
 }
+.noShow{
+  opacity:0;
+}
 .game {
-  width: 40vw;
-  height: 700px;
-  background: darkslategrey;
-  position: fixed;
+  width:600px;
+  height: 980px;
+  background: mediumpurple;
+  /*position: fixed;*/
   font-size: 30px;
+  border-radius: 30px;
 }
-.bullet {
-  border-left: 1px solid black;
-  display: inline-block;
+.scoreboard {
+  background: gold;
+  width: 300px;
+  padding: 50px;
+  margin: 50px;
 }
-.circle{
-   border-radius: 100px;
-   background: black;
-   width: 15px;
-   height: 15px;
-   position: relative;
-   top: 670px;
-   margin: 0 auto;
+.instructions {
+  background: lightpink;
+  width: 300px;
+  padding: 50px;
+  margin: 50px;
+}
+.set {
+  position: absolute;
+  color: black;
+  margin-top: 60px;
 }
 #animateWord0 {
   animation: expand 5s linear;
-  animation-delay: 1s;
+  animation-delay: 2s;
 }
 #animateWord1 {
   animation: expand 5s linear;
@@ -32,77 +43,73 @@
 }
 #animateWord2 {
   animation: expand 5s linear;
+  animation-delay: 1s;
 }
 #animateWord3 {
   animation: expand 5s linear;
-  animation-delay: 7s;
+  animation-delay: 4s;
 }
 #animateWord4 {
   animation: expand 5s linear;
-  animation-delay: 9s;
+  animation-delay: 5s;
 }
 #animateWord5 {
   animation: expand 5s linear;
-  animation-delay: 11s;
+  animation-delay: 6s;
 }
 #animateWord6 {
   animation: expand 5s linear;
-  animation-delay: 13s;
+  animation-delay: 7s;
 }
 #animateWord7 {
   animation: expand 5s linear;
-  animation-delay: 15s;
+  animation-delay: 8s;
 }
 #animateWord8 {
   animation: expand 5s linear;
-  animation-delay: 17s;
+  animation-delay: 9s;
 }
 #animateWord9 {
   animation: expand 5s linear;
-  animation-delay: 19s;
-}
-.set {
-  position: absolute;
-  color: white;
-  margin-top: -40px;
+  animation-delay: 10s;
 }
 .position0{
-  margin-left: 20%;
+  margin-left: 70px;
 }
  .position1{
-  margin-left: 40%;
+  margin-left: 200px;
 }
  .position2{
-  margin-left: 60%;
+  margin-left: 300px;
 }
  .position3{
-  margin-left: 80%;
+  margin-left: 420px;
 }
  .position4{
-  margin-left: 40%;
+  margin-left: 200px;
 }
  .position5{
-  margin-left: 60%;
+  margin-left: 300px;
 }
  .position6{
-  margin-left: 80%;
+  margin-left: 420px;
 }
  .position7{
-  margin-left: 40%;
+  margin-left: 300px;
 }
  .position8{
-  margin-left: 60%;
+  margin-left: 420px;
 }
  .position9{
-  margin-left: 80%;
+  margin-left: 420px;
 }
 @keyframes expand{
     0%{
       margin-top:0px;
-      margin-bottom:500px;
+      margin-bottom:680px;
     }
     100%{
-      margin-top:500px;
+      margin-top:680px;
       margin-bottom:0px;
     }
 }
