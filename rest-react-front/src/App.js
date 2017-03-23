@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './App.css';
 import 'animate.css';
 
-console.log("Made by ANNIE :D :D :D :D :D @ linye.zhang18@gmail.com holla");
+console.log("Made by ANNIE :D linye.zhang18@gmail.com holla");
 
 // game display
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
     this.typedWord = '';
     this.state = {
       scoreboard: [], // top 5 players' scores, put object in array? or make separate array for players' names
-      wordsArray: ['a','b','c','d','e','f','g','h','i','j'],
+      wordsArray: ['will','thuy','daniel','jin','ian','jonathan','alex','brad','mandy','rares'],
       animation: [],
       bouncing: [],
       position: {left: 0},
@@ -20,13 +20,18 @@ class App extends Component {
       points: 0,
       counter: 0,
       winOpacity: 0,
+      loseOpacity: 0,
+      finalOpacity: 0,
       levelComplete: false,
-      level:0,
-      timeCounter: 0
+      level: 0,
+      timeCounter: 0,
+      currentLevel: 0
     };
     this.detectWord = this.detectWord.bind(this);
     this.wordMatch = this.wordMatch.bind(this);
     this.tick = this.tick.bind(this);
+    this.quitButton = this.quitButton.bind(this);
+    this.restartButton = this.restartButton.bind(this);
 
     for (let i = 0; i < this.state.wordsArray.length; i++) {
       this.state.top.push({top:0});
@@ -66,12 +71,14 @@ class App extends Component {
             this.setState({
                 timeCounter: 0,
                 winOpacity: 0,
+                loseOpacity: 0,
                 counter: 0,
-                wordsArray: ['1','2','3','4','5','6','7','8','9','z'],
+                wordsArray: ['react','javascript','console','postgres','render','loop','brainstation','angular','ruby','ocaml'],
                 animation: animation,
                 bouncing: bouncing,
                 top: top,
-                levelComplete: false
+                levelComplete: false,
+                currentLevel: this.state.currentLevel + 1
               });
           }
 
@@ -80,31 +87,72 @@ class App extends Component {
             this.setState({
                 timeCounter: 0,
                 winOpacity: 0,
+                loseOpacity: 0,
                 counter: 0,
-                wordsArray: ['will','thuy','daniel','ian','jin','jonathan','rares','alex','brad','mandy'],
+                wordsArray: ['goldendoodle','beagle','corgi','dachshund','husky','samoyed','greyhound','malamute','bulldog','rottweiler'],
                 animation: animation,
                 bouncing: bouncing,
                 top: top,
-                levelComplete: false
+                levelComplete: false,
+                currentLevel: this.state.currentLevel + 1
               });
           }
-        }, 2000
+        }, 2500
       );
 
       setTimeout(
         () => {
-          if (this.state.levelComplete === false) {
+          if ((this.state.level === 0 || this.state.level === 1) && this.state.levelComplete === false) {
             this.setState({
               winOpacity: 1,
               levelComplete: true,
               level: this.state.level + 1
             })
-          } else {
-            console.log('ok there will')
+          } else if (this.state.level === 2 && this.state.levelComplete === false) {
+            // console.log('ok there will');
+            this.setState({
+              finalOpacity: 1,
+              levelComplete: false,
+              level: this.state.level + 1
+            })
           }
-        }, 50
+        }, 1000
       );
     }
+
+    else if (this.state.counter < 6 && this.state.timeCounter === 15) {
+      setTimeout(
+        () => {
+          this.setState({
+            loseOpacity: 1
+          })
+        }, 2000
+      )
+    }
+  }
+
+  restartButton() {
+    // this.setState({
+    //   scoreboard: [],
+    //   wordsArray: ['will','thuy','daniel','jin','ian','jonathan','alex','brad','mandy','rares'],
+    //   animation: [],
+    //   bouncing: [],
+    //   position: {left: 0},
+    //   top: [],
+    //   points: 0,
+    //   counter: 0,
+    //   winOpacity: 0,
+    //   loseOpacity: 0,
+    //   finalOpacity: 0,
+    //   levelComplete: false,
+    //   level: 0,
+    //   timeCounter: 0,
+    //   currentLevel: 0
+    // })
+  }
+
+  quitButton() {
+
   }
 
   // matches typed word to given word in array
@@ -150,22 +198,34 @@ class App extends Component {
 
   render() {
     let renderedArray = this.state.wordsArray.map((word, i)=>{
-      return <div ref={`word${i}`} key={i} className={`position${i} set ${this.state.bouncing[i]}`} style={this.state.top[i]} id = {this.state.animation[i]} > {word} </div>;
+      return <div ref={`word${i}`} key={i} className={`position${i} set ${this.state.bouncing[i]}`} style={this.state.top[i]} id={this.state.animation[i]} >{word}</div>;
     });
 
     return (<div className="screen">
-              {/*<div className="instructions">
-                <h1>{this.state.level}</h1>
-              </div>*/}
-              <header>hi</header>
-              <div className="game">
+              <header>
+                <h1>
+                  <em>T</em>
+                  <em>Y</em>
+                  <em>P</em>
+                  <em>E</em>
+                  <em className="planet right">I</em>
+                  <em>T</em>
+                </h1>
+                <span>Contact Me</span>
+              </header>
+              <div className="game button red text-blanco text-shadow-negra">
                 {renderedArray}
-                <h1 className={this.state.winOpacity > 0 ? "animated bounceIn" : 'noShow'}>Next Level</h1>
-                <h1 className={this.state.finalOpacity > 0 ? "animated bounceIn" : 'noShow'}>HARVEY</h1>
+                <h2 className={this.state.winOpacity > 0 ? 'animated zoomIn popup' : 'noShow'}>Next Level</h2>
+                <h2 className={this.state.loseOpacity > 0 ? 'animated hinge popup' : 'noShow'}>Game Over</h2>
+                <h2 className={this.state.finalOpacity > 0 ? 'animated zoomIn popup' : 'noShow'}>HARVEY</h2>
               </div>
 
               <div className="scoreboard">
-                <h1>{this.state.points}</h1>
+                <h3>THEME:<br /> Instructors</h3>
+                <h3>POINTS:<br /> {this.state.points}</h3>
+                <h3>CURRENT LEVEL:<br /> {this.state.currentLevel + 1}</h3>
+                {/*<button onClick={this.restartButton}>RESTART {this.state.counter}</button>*/}
+                <button onClick={this.quitButton}>QUIT</button>
               </div>
             </div>);
   }
