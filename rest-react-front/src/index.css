@@ -50,6 +50,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: top;
+  height: 90vh;
 }
 .noShow{
   opacity: 0;
@@ -130,13 +131,13 @@ a:link {
   text-align: right;
 }
 a:hover {
-    text-decoration: underline;
-    text-align: right;
+  text-decoration: underline;
+  text-align: right;
 }
 a:visited {
-    text-decoration: none;
-    color: black;
-    text-align: right;
+  text-decoration: none;
+  color: black;
+  text-align: right;
 }
 #animateWord0 {
   animation: expand 5s linear;
