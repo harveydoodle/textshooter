@@ -1,11 +1,11 @@
 /* BACKGROUND */
 body {
-  background: lightgray;
+  background: #EEE;
   margin-top:10px;
   font-family: 'century gothic';
 }
 header {
-  background: lightgray;
+  background: #EEE;
   position:fixed;
   top: 0;
   left: 0;
@@ -15,43 +15,6 @@ header {
   z-index: 1;
   padding:10px;
 }
-body, header {
-  background-color: #f76;
-  background-image:
-    linear-gradient(30deg, #fee 13.5%, transparent 13.5%, transparent 86.5%, #fee 86.5%),
-        linear-gradient(-30deg, #fee 13.5%, transparent 13.5%, transparent 86.5%, #fee 86.5%),
-        linear-gradient(30deg, #dcc 13.5%, transparent 13.5%, transparent 86.5%, #dcc 86.5%),
-        linear-gradient(-30deg, #dcc 13.5%, transparent 13.5%, transparent 86.5%, #dcc 86.5%),
-        linear-gradient(30deg, #fee 13.5%, transparent 13.5%, transparent 86.5%, #fee 86.5%),
-        linear-gradient(-30deg, #fee 13.5%, transparent 13.5%, transparent 86.5%, #fee 86.5%),
-        linear-gradient(30deg, #dcc 13.5%, transparent 13.5%, transparent 86.5%, #dcc 86.5%),
-        linear-gradient(-30deg, #dcc 13.5%, transparent 13.5%, transparent 86.5%, #dcc 86.5%),
-        linear-gradient(45deg, #544 25%, transparent 25%, transparent 75%, #544 75%),
-        linear-gradient(45deg, #544 25%, transparent 25%, transparent 75%, #544 75%);
-    background-position:
-        0em 2em,
-        0em 2em,
-        2em 4em,
-        2em 4em,
-        4em 2em,
-        4em 2em,
-        6em 4em,
-        6em 4em,
-        0em 0em,
-        2em 2em;
-    background-size:
-        8em 4em,
-        8em 4em,
-        8em 4em,
-        8em 4em,
-        8em 4em,
-        8em 4em,
-        8em 4em,
-        8em 4em,
-        4em 4em,
-        4em 4em;
-}
-
 h2 {
   font-size: 38px;
 }
@@ -74,6 +37,28 @@ span:nth-child(2) {
 }
 .noShow{
   opacity:0;
+  display: inline-block;
+}
+.gameOver {
+  position: relative;
+  display: inline-block;
+  top: 30%;
+}
+.harveyEnd {
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  top: 0;
+}
+img {
+  width: 100%;
+}
+.passLevel {
+  top: 40%;
+  display: inline-block;
+  text-align: right;
+  position: relative;
+  left: 150px;
 }
 .game {
   width: 500px;
@@ -101,10 +86,10 @@ span:nth-child(2) {
   border-radius: 20px;
   background: lightsteelblue;
   width: 100px;
-  height: 300px;
+  height: 250px;
   padding: 50px;
-  margin: 120px 50px 50px 50px;
-  left:1300px;
+  margin-top: 120px;
+  right: 150px;
   
   border: 4px solid black;
   /*box-shadow: 2px 2px 4px #000000;*/
@@ -115,15 +100,16 @@ span:nth-child(2) {
   color: black;
   margin-top: -60px;
 }
-button {
-  background: none;
-  box-shadow: none;
-  border: 1px solid black;
-  border-radius: 3px;
-  font-family: 'century gothic';
-  font-size: 14px;
-  width: 90px;
-  height: 25px;
+a:link {
+    text-decoration: none;
+    color:black;
+}
+a:hover {
+    text-decoration: underline;
+}
+a:visited {
+    text-decoration: none;
+    color:black;
 }
 #animateWord0 {
   animation: expand 5s linear;

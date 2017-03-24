@@ -12,7 +12,7 @@ class App extends Component {
     this.typedWord = '';
     this.state = {
       scoreboard: [], // top 5 players' scores, put object in array? or make separate array for players' names
-      wordsArray: ['will','thuy','daniel','jin','ian','jonathan','alex','brad','mandy','rares'],
+      wordsArray: [],
       animation: [],
       bouncing: [],
       position: {left: 0},
@@ -25,15 +25,22 @@ class App extends Component {
       levelComplete: false,
       level: 0,
       timeCounter: 0,
-      currentLevel: 0
+      currentLevel: 0,
+      theme: ''
     };
     this.detectWord = this.detectWord.bind(this);
     this.wordMatch = this.wordMatch.bind(this);
     this.tick = this.tick.bind(this);
-    this.quitButton = this.quitButton.bind(this);
-    this.restartButton = this.restartButton.bind(this);
+    this.resetState = this.resetState.bind(this);
 
-    for (let i = 0; i < this.state.wordsArray.length; i++) {
+    this.arrayOfArray = [
+        ['will','thuy','daniel','jin','ian','jonathan','alex','brad','mandy','rares'],
+        ['react','javascript','console','postgres','render','loop','brainstation','angular','ruby','ocaml'],
+        ['goldendoodle','beagle','corgi','dachshund','husky','samoyed','greyhound','malamute','bulldog','rottweiler']
+    ]
+    this.themes = ['BrainStation Instructors','Programming','Dog Breeds']
+
+    for (let i = 0; i < 10; i++) {
       this.state.top.push({top:0});
       this.state.animation.push(`animateWord${i}`);
       this.state.bouncing.push('');
@@ -43,116 +50,98 @@ class App extends Component {
   // when page mounts, event handler will run
   componentDidMount() {
     window.addEventListener('keypress', this.detectWord);
-    setInterval(()=>{this.tick()}, 5000);
+    setInterval(()=>{this.tick()}, 1000);
+    this.setState({
+      wordsArray: this.arrayOfArray[0],
+      theme: this.themes[0]
+    })
   }
 
   tick () {
     this.setState({
-      timeCounter: this.state.timeCounter + 5
+      timeCounter: this.state.timeCounter + 1
     })
   }
 
+  /* 
+    if timeCounter == done)
+      if(won game)
+
+      else if(lost game)
+
+    if we are:
+      - reset game state
+      - check if levelComplete and set up next level
+      - 
+  */
+
   componentDidUpdate() {
-    // if user passes all levels
-    if (this.state.counter === 10 || (this.state.counter > 5 && this.state.timeCounter === 15)) {
-      setTimeout(
-        () =>{
-          let animation = [];
-          let bouncing = [];
-          let top = [];
-
-          for (let i = 0; i < this.state.wordsArray.length; i++) {
-            top.push({top:0});
-            animation.push(`animateWord${i}`);
-            bouncing.push('');
-          }
-          if (this.state.level === 1 && this.state.levelComplete) {
-            // console.log('level 1')
-            this.setState({
-                timeCounter: 0,
-                winOpacity: 0,
-                loseOpacity: 0,
-                counter: 0,
-                wordsArray: ['react','javascript','console','postgres','render','loop','brainstation','angular','ruby','ocaml'],
-                animation: animation,
-                bouncing: bouncing,
-                top: top,
-                levelComplete: false,
-                currentLevel: this.state.currentLevel + 1
-              });
-          }
-
-          else if (this.state.level === 2 && this.state.levelComplete) {
-            // console.log('level 2')
-            this.setState({
-                timeCounter: 0,
-                winOpacity: 0,
-                loseOpacity: 0,
-                counter: 0,
-                wordsArray: ['goldendoodle','beagle','corgi','dachshund','husky','samoyed','greyhound','malamute','bulldog','rottweiler'],
-                animation: animation,
-                bouncing: bouncing,
-                top: top,
-                levelComplete: false,
-                currentLevel: this.state.currentLevel + 1
-              });
-          }
-        }, 2500
-      );
-
-      setTimeout(
-        () => {
-          if ((this.state.level === 0 || this.state.level === 1) && this.state.levelComplete === false) {
+    // if user passed the level
+    if ((this.state.counter === 10 && this.state.timeCounter === 15) || (this.state.counter > 5 && this.state.timeCounter === 15)) {
+          // if user is at level 0 or 1, and they pass it
+          if (this.state.levelComplete === false && (this.state.level === 0 || this.state.level === 1)) {
             this.setState({
               winOpacity: 1,
               levelComplete: true,
               level: this.state.level + 1
             })
-          } else if (this.state.level === 2 && this.state.levelComplete === false) {
-            // console.log('ok there will');
+          }
+          // if user is at level 2, and they pass it
+          else if (this.state.level === 2 && this.state.levelComplete === false) {
             this.setState({
               finalOpacity: 1,
               levelComplete: false,
               level: this.state.level + 1
             })
           }
-        }, 1000
-      );
-    }
 
+          // if we just finished level 0, proceed to level 1
+          if ((this.state.level === 1 || this.state.level === 2) && this.state.levelComplete) {
+            this.resetState(this.state.level);
+          }
+    }
+    // otherwise if we lose
     else if (this.state.counter < 6 && this.state.timeCounter === 15) {
-      setTimeout(
-        () => {
-          this.setState({
-            loseOpacity: 1
-          })
-        }, 2000
-      )
+        this.setState({
+          loseOpacity: 1,
+          timeCounter: 0
+        })
     }
   }
 
-  restartButton() {
-    // this.setState({
-    //   scoreboard: [],
-    //   wordsArray: ['will','thuy','daniel','jin','ian','jonathan','alex','brad','mandy','rares'],
-    //   animation: [],
-    //   bouncing: [],
-    //   position: {left: 0},
-    //   top: [],
-    //   points: 0,
-    //   counter: 0,
-    //   winOpacity: 0,
-    //   loseOpacity: 0,
-    //   finalOpacity: 0,
-    //   levelComplete: false,
-    //   level: 0,
-    //   timeCounter: 0,
-    //   currentLevel: 0
-    // })
-  }
+  // if we just finished a level, proceed to next level
+  resetState(level) {
+    // reset the game state for a new level
+    let animation = [];
+    let bouncing = [];
+    let top = [];
+    let wordsArray = this.arrayOfArray[level];
+    // let theme = this.themes[level];
 
-  quitButton() {
-
+    for (let i = 0; i < 10; i++) {
+      top.push({top:0});
+      animation.push(`animateWord${i}`);
+      bouncing.push('');
+    }
+    this.setState({
+      timeCounter: 0,
+      loseOpacity: 0,
+      counter: 0,
+      wordsArray: this.arrayOfArray[level],
+      animation: animation,
+      bouncing: bouncing,
+      top: top,
+      levelComplete: false,
+      currentLevel: level,
+      theme: this.themes[level]
+    });
+    
+    setTimeout(
+      () => {
+        this.setState({
+          winOpacity: 0
+        })
+      }, 1500)
   }
 
   // matches typed word to given word in array
@@ -163,7 +152,8 @@ class App extends Component {
   // detects character user types on keyboard and concats its in state
   detectWord(e) {
     const array       = this.state.wordsArray;
-    const topPos      = {top: 0};
+    // const topPos      = {top: 0};
+
     const newArray    = this.state.top; // resets each time
     const falling     = '';
     const newFall     = this.state.animation;
@@ -177,7 +167,7 @@ class App extends Component {
     if (match > -1) {
       this.typedWord  = '';
       let refName     = `word${match}`;
-
+      
       // gets the location of word user types
       let aimWord       = ReactDOM.findDOMNode(this.refs[`${refName}`]);
       let wordLocation  = aimWord.getBoundingClientRect();
@@ -204,28 +194,23 @@ class App extends Component {
     return (<div className="screen">
               <header>
                 <h1>
-                  <em>T</em>
-                  <em>Y</em>
-                  <em>P</em>
-                  <em>E</em>
-                  <em className="planet right">I</em>
-                  <em>T</em>
+                  <em>T</em><em>Y</em><em>P</em><em>E</em><em className="planet right">I</em><em>T</em>
                 </h1>
-                <span>Contact Me</span>
+                <span>
+                  <a href="mailto:linye.zhang18@gmail.com" target="_blank">Contact me</a>
+                </span>
               </header>
               <div className="game button red text-blanco text-shadow-negra">
                 {renderedArray}
-                <h2 className={this.state.winOpacity > 0 ? 'animated zoomIn popup' : 'noShow'}>Next Level</h2>
-                <h2 className={this.state.loseOpacity > 0 ? 'animated hinge popup' : 'noShow'}>Game Over</h2>
-                <h2 className={this.state.finalOpacity > 0 ? 'animated zoomIn popup' : 'noShow'}>HARVEY</h2>
+                <h2 className={this.state.winOpacity > 0 ? 'animated flash popup passLevel' : 'noShow'}>Next Level</h2>
+                <h2 className={this.state.loseOpacity > 0 ? 'animated hinge popup gameOver' : 'noShow'}>Game Over</h2>
+                <h2 className={this.state.finalOpacity > 0 ? 'animated wobble popup harveyEnd' : 'noShow'}><img src="harvey.png" /></h2>
               </div>
 
               <div className="scoreboard">
-                <h3>THEME:<br /> Instructors</h3>
-                <h3>POINTS:<br /> {this.state.points}</h3>
-                <h3>CURRENT LEVEL:<br /> {this.state.currentLevel + 1}</h3>
-                {/*<button onClick={this.restartButton}>RESTART {this.state.counter}</button>*/}
-                <button onClick={this.quitButton}>QUIT</button>
+                <h3>THEME:<br /> <b>{this.state.theme}</b></h3>
+                <h3>SCORE:<br /> <b>{this.state.points}</b></h3>
+                <h3>CURRENT LEVEL:<br /> <b>{this.state.currentLevel + 1}</b></h3>
               </div>
             </div>);
   }
