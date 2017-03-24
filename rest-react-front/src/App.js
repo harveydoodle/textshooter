@@ -46,7 +46,7 @@ class App extends Component {
 
     // Create starting states for empty arrays
     for (let i = 0; i < 10; i++) {
-      this.state.top.push({top:0});
+      this.state.top.push({ top: 0 });
       this.state.animation.push(`animateWord${i}`);
       this.state.bouncing.push('');
     }
@@ -55,7 +55,7 @@ class App extends Component {
   // When page mounts, event handler will run
   componentDidMount() {
     window.addEventListener('keypress', this.detectWord);
-    setInterval(()=>{this.tick()}, 1000);
+    setInterval( () => { this.tick() }, 1000);
     this.setState({
       wordsArray: this.arrayOfArray[0],
       theme: this.themes[0]
@@ -144,7 +144,7 @@ class App extends Component {
   // Detects character user types on keyboard and concats its in state
   detectWord(e) {
     const array       = this.state.wordsArray;
-    const newArray    = this.state.top; // resets each time
+    const newArray    = this.state.top; // Resets each time
     const falling     = '';
     const newFall     = this.state.animation;
     const bounce      = 'animated bounceOut';
@@ -162,7 +162,7 @@ class App extends Component {
       // Gets the location of word user types
       let aimWord       = ReactDOM.findDOMNode(this.refs[`${refName}`]);
       let wordLocation  = aimWord.getBoundingClientRect();
-      let topPos        = {top: wordLocation.top + 50};
+      let topPos        = { top: wordLocation.top + 50 };
       // Updates the array depending on word user types for animation purposes
       newArray.splice(match, 1, topPos);
       newAnim.splice(match, 1, bounce);
@@ -179,7 +179,7 @@ class App extends Component {
   }
 
   render() {
-    let renderedArray = this.state.wordsArray.map((word, i)=>{
+    let renderedArray = this.state.wordsArray.map( (word, i) => {
       return <div ref={`word${i}`} key={i} className={`position${i} set ${this.state.bouncing[i]}`} style={this.state.top[i]} id={this.state.animation[i]} >{word}</div>;
     });
 
@@ -193,9 +193,10 @@ class App extends Component {
                   <em className="planet right">I</em>
                   <em>T</em>
                 </h1>
-                <span>
-                  <a href="mailto:linye.zhang18@gmail.com" target="_blank">Contact me</a>
-                </span>
+                <p>
+                  <a href="mailto:linye.zhang18@gmail.com" target="_blank">>_ contact me</a><br />
+                  <a href="http://anniezhang.herokuapp.com/" target="_blank">>_ portfolio</a>
+                </p>
               </header>
               <div className="game button red text-blanco text-shadow-negra">
                 {renderedArray}
@@ -204,10 +205,14 @@ class App extends Component {
                 <h2 className={this.state.finalOpacity > 0 ? 'animated wobble popup harveyEnd' : 'noShow'}><img src="harvey.png" alt="goldendoodle"/></h2>
               </div>
 
-              <div className="scoreboard">
-                <h3>THEME:<br /> <b>{this.state.theme}</b></h3>
-                <h3>SCORE:<br /> <b>{this.state.points}</b></h3>
-                <h3>CURRENT LEVEL:<br /> <b>{this.state.currentLevel + 1}</b></h3>
+              <div className="scoreboard topboard">
+                <h4><b>{this.state.theme}</b></h4><br /><br /><h6>THEME</h6>
+              </div>
+                <div className="scoreboard middleboard">
+                <h3><b>{this.state.points}</b></h3><br /><br /><h6>SCORE</h6>
+              </div>
+                <div className="scoreboard bottomboard">
+                <h3><b>{this.state.currentLevel + 1}</b></h3><br /><br /><h6>LEVEL</h6>
               </div>
             </div>);
   }
