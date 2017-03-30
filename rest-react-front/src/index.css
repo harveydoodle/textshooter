@@ -50,7 +50,9 @@ p {
   display: flex;
   justify-content: center;
   align-items: top;
-  height: 90vh;
+  height: 600px;
+  position: fixed;
+  left: 430px;
 }
 .noShow{
   opacity: 0;
@@ -84,7 +86,7 @@ img {
 }
 .game {
   width: 500px;
-  height: 800px;
+  height: 670px;
   font-size: 24px;
   border: 2px solid black;
   border-radius: 8px;
@@ -106,7 +108,7 @@ img {
   width: 80px;
   height: 30px;
   padding: 40px;
-  right: 280px;
+  right: -150px;
   border: 2px solid black;
   text-align: center;
 }
@@ -212,13 +214,13 @@ a:visited {
 @keyframes expand{
     0%{
       margin-top: 0px;
-      margin-bottom: 880px;
+      margin-bottom: 700px;
     }
     80% {
       opacity: 1;
     }
     100%{
-      margin-top: 880px;
+      margin-top: 700px;
       margin-bottom: 0px;
       opacity: 0;
     }
