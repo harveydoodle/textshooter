@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Scoreboard from './Scoreboard';
+import Header from './Header';
+import MainScreen from './MainScreen';
 import './App.css';
 import 'animate.css';
 
@@ -184,37 +187,20 @@ class App extends Component {
     });
 
     return (<div className="screen">
-              <header>
-                <h1>
-                  <em>T</em>
-                  <em>Y</em>
-                  <em>P</em>
-                  <em>E</em>
-                  <em className="planet right">I</em>
-                  <em>T</em>
-                </h1>
-                <p>
-                  <a href="mailto:linye.zhang18@gmail.com" target="_blank">>_ contact me</a><br />
-                  <a href="http://anniezhang.herokuapp.com/" target="_blank">>_ portfolio</a>
-                </p>
-              </header>
-              <div className="game button red text-blanco text-shadow-negra">
-                {renderedArray}
-                <h2 className={this.state.winOpacity > 0 ? 'animated flash popup passLevel' : 'noShow'}>Next Level</h2>
-                <h2 className={this.state.loseOpacity > 0 ? 'animated hinge popup gameOver' : 'noShow'}>Game Over</h2>
-                <h2 className={this.state.finalOpacity > 0 ? 'animated wobble popup harveyEnd' : 'noShow'}><img src="harvey.png" alt="goldendoodle"/></h2>
-              </div>
-
-              <div className="scoreboard topboard">
-                <h4><b>{this.state.theme}</b></h4><br /><br /><h6>THEME</h6>
-              </div>
-                <div className="scoreboard middleboard">
-                <h3><b>{this.state.points}</b></h3><br /><br /><h6>SCORE</h6>
-              </div>
-                <div className="scoreboard bottomboard">
-                <h3><b>{this.state.currentLevel + 1}</b></h3><br /><br /><h6>LEVEL</h6>
-              </div>
-            </div>);
+              <Header />
+              <MainScreen
+                renderedArray={renderedArray}
+                winOpacity={this.state.winOpacity}
+                loseOpacity={this.state.loseOpacity}
+                finalOpacity={this.state.finalOpacity}
+              />
+              <Scoreboard
+                theme={this.state.theme}
+                points={this.state.points}
+                currentLevel={this.state.currentLevel}
+              />
+            </div>
+            );
   }
 }
 
