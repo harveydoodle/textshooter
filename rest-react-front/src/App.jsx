@@ -64,9 +64,11 @@ class App extends Component {
 
   componentDidUpdate() {
     // If user passed the level
-    if ((this.state.counter === 10 && this.state.timeCounter === 15) || (this.state.counter > 5 && this.state.timeCounter === 15)) {
+    if ((this.state.counter === 10 && this.state.timeCounter === 15)
+      || (this.state.counter > 5 && this.state.timeCounter === 15)) {
       // If user is at level 0 or 1, and they pass it
-      if (this.state.levelComplete === false && (this.state.level === 0 || this.state.level === 1)) {
+      if (this.state.levelComplete === false && (this.state.level === 0
+        || this.state.level === 1)) {
         this.setState({
           winOpacity: 1,
           levelComplete: true,
@@ -173,7 +175,16 @@ class App extends Component {
 
   render() {
     const renderedArray = this.state.wordsArray.map((word, i) => {
-      return <div ref={`word${i}`} key={i} className={`position${i} set ${this.state.bouncing[i]}`} style={this.state.top[i]} id={this.state.animation[i]} >{word}</div>;
+      return (
+        <div
+          ref={`word${i}`}
+          key={i}
+          className={`position${i} set ${this.state.bouncing[i]}`}
+          style={this.state.top[i]}
+          id={this.state.animation[i]}
+        >
+          {word}
+        </div>);
     });
 
     return (<div className="screen">
