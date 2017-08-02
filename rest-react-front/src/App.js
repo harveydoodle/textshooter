@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import Scoreboard from './Scoreboard';
 import Header from './Header';
 import MainScreen from './MainScreen';
+import { arrayOfArray, themes } from './Constants';
 import './App.css';
 import 'animate.css';
 
-console.log("Made by ANNIE :D linye.zhang18@gmail.com holla");
+console.log("follow my dog on Instagram: instagram.com/harveydroolmonster");
 
 // Game begins on refresh 
 // Game display
@@ -18,7 +19,7 @@ class App extends Component {
       wordsArray: [],
       animation: [],
       bouncing: [],
-      position: {left: 0},
+      position: { left: 0 },
       top: [],
       points: 0,
       counter: 0,
@@ -29,23 +30,12 @@ class App extends Component {
       level: 0,
       timeCounter: 0,
       currentLevel: 0,
-      theme: ''
+      theme: '',
     };
     this.detectWord = this.detectWord.bind(this);
     this.wordMatch = this.wordMatch.bind(this);
     this.tick = this.tick.bind(this);
     this.resetState = this.resetState.bind(this);
-
-    // Words for the 3 levels
-    this.arrayOfArray = [ 
-                          ['will','thuy','daniel','jin','ian','jonathan','alex','brad','mandy','rares'],
-                          ['react','javascript','console','postgres','render','loop','brainstation','angular','ruby','ocaml'],
-                          ['goldendoodle','beagle','corgi','dachshund','husky','samoyed','greyhound','malamute','bulldog','rottweiler']
-                        ]
-    // Themes for the 3 levels
-    this.themes = ['BrainStation Instructors',
-                   'Programming',
-                   'Dog Breeds']
 
     // Create starting states for empty arrays
     for (let i = 0; i < 10; i++) {
@@ -58,62 +48,62 @@ class App extends Component {
   // When page mounts, event handler will run
   componentDidMount() {
     window.addEventListener('keypress', this.detectWord);
-    setInterval( () => { this.tick() }, 1000);
+    setInterval(() => { this.tick(); }, 1000);
     this.setState({
-      wordsArray: this.arrayOfArray[0],
-      theme: this.themes[0]
-    })
+      wordsArray: arrayOfArray[0],
+      theme: themes[0],
+    });
   }
 
   // Keeps a counter (every 15 seconds) to control changing levels 
-  tick () {
+  tick() {
     this.setState({
-      timeCounter: this.state.timeCounter + 1
-    })
+      timeCounter: this.state.timeCounter + 1,
+    });
   }
 
   componentDidUpdate() {
     // If user passed the level
     if ((this.state.counter === 10 && this.state.timeCounter === 15) || (this.state.counter > 5 && this.state.timeCounter === 15)) {
-          // If user is at level 0 or 1, and they pass it
-          if (this.state.levelComplete === false && (this.state.level === 0 || this.state.level === 1)) {
-            this.setState({
-              winOpacity: 1,
-              levelComplete: true,
-              level: this.state.level + 1
-            });
-          }
-          // If user is at level 2, and they pass it
-          else if (this.state.level === 2 && this.state.levelComplete === false) {
-            this.setState({
-              finalOpacity: 1,
-              levelComplete: false,
-              level: this.state.level + 1
-            });
-          }
-          // If we just finished level 0, proceed to level 1
-          if ((this.state.level === 1 || this.state.level === 2) && this.state.levelComplete) {
-            this.resetState(this.state.level);
-          }
+      // If user is at level 0 or 1, and they pass it
+      if (this.state.levelComplete === false && (this.state.level === 0 || this.state.level === 1)) {
+        this.setState({
+          winOpacity: 1,
+          levelComplete: true,
+          level: this.state.level + 1,
+        });
+      }
+      // If user is at level 2, and they pass it
+      else if (this.state.level === 2 && this.state.levelComplete === false) {
+        this.setState({
+          finalOpacity: 1,
+          levelComplete: false,
+          level: this.state.level + 1,
+        });
+      }
+      // If we just finished level 0, proceed to level 1
+      if ((this.state.level === 1 || this.state.level === 2) && this.state.levelComplete) {
+        this.resetState(this.state.level);
+      }
     }
     // Otherwise if they lose
     else if (this.state.counter < 6 && this.state.timeCounter === 15) {
-        this.setState({
-          loseOpacity: 1,
-          timeCounter: 0
-        });
+      this.setState({
+        loseOpacity: 1,
+        timeCounter: 0,
+      });
     }
   }
 
   // If we just finished a level, proceed to next level
   resetState(level) {
     // reset the game state for a new level
-    let animation = [];
-    let bouncing = [];
-    let top = [];
+    const animation = [];
+    const bouncing = [];
+    const top = [];
 
     for (let i = 0; i < 10; i++) {
-      top.push({top:0});
+      top.push({ top:0 });
       animation.push(`animateWord${i}`);
       bouncing.push('');
     }
@@ -123,19 +113,19 @@ class App extends Component {
       loseOpacity: 0,
       counter: 0,
       wordsArray: this.arrayOfArray[level],
-      animation: animation,
-      bouncing: bouncing,
-      top: top,
+      animation,
+      bouncing,
+      top,
       levelComplete: false,
       currentLevel: level,
-      theme: this.themes[level]
+      theme: this.themes[level],
     });
-    
+
     setTimeout(
       () => {
         this.setState({
-          winOpacity: 0
-        })
+          winOpacity: 0,
+        });
       }, 1500);
   }
 
@@ -146,26 +136,26 @@ class App extends Component {
 
   // Detects character user types on keyboard and concats its in state
   detectWord(e) {
-    const array       = this.state.wordsArray;
-    const newArray    = this.state.top; // Resets each time
-    const falling     = '';
-    const newFall     = this.state.animation;
-    const bounce      = 'animated bounceOut';
-    const newAnim     = this.state.bouncing;
-    const c           = String.fromCharCode(e.keyCode);
+    const array = this.state.wordsArray;
+    const newArray = this.state.top; // Resets each time
+    const falling = '';
+    const newFall = this.state.animation;
+    const bounce = 'animated bounceOut';
+    const newAnim = this.state.bouncing;
+    const c = String.fromCharCode(e.keyCode);
 
     // Can sense the character user types and match lowercase version
-    this.typedWord    = (this.typedWord += c.toLowerCase());
-    let match         = array.findIndex(this.wordMatch); // match = index of word user types
+    this.typedWord = (this.typedWord += c.toLowerCase());
+    const match = array.findIndex(this.wordMatch); // match = index of word user types
 
     if (match > -1) {
-      this.typedWord  = '';
-      let refName     = `word${match}`;
-      
+      this.typedWord = '';
+      const refName = `word${match}`;
+
       // Gets the location of word user types
-      let aimWord       = ReactDOM.findDOMNode(this.refs[`${refName}`]);
-      let wordLocation  = aimWord.getBoundingClientRect();
-      let topPos        = { top: wordLocation.top + 50 };
+      const aimWord = ReactDOM.findDOMNode(this.refs[`${refName}`]);
+      const wordLocation = aimWord.getBoundingClientRect();
+      const topPos = { top: wordLocation.top + 50 };
       // Updates the array depending on word user types for animation purposes
       newArray.splice(match, 1, topPos);
       newAnim.splice(match, 1, bounce);
@@ -176,31 +166,31 @@ class App extends Component {
         bouncing: newAnim,
         animation: newFall,
         points: this.state.points + this.state.wordsArray[match].length,
-        counter: this.state.counter + 1
+        counter: this.state.counter + 1,
       });
-    };
+    }
   }
 
   render() {
-    let renderedArray = this.state.wordsArray.map( (word, i) => {
+    const renderedArray = this.state.wordsArray.map((word, i) => {
       return <div ref={`word${i}`} key={i} className={`position${i} set ${this.state.bouncing[i]}`} style={this.state.top[i]} id={this.state.animation[i]} >{word}</div>;
     });
 
     return (<div className="screen">
-              <Header />
-              <MainScreen
-                renderedArray={renderedArray}
-                winOpacity={this.state.winOpacity}
-                loseOpacity={this.state.loseOpacity}
-                finalOpacity={this.state.finalOpacity}
-              />
-              <Scoreboard
-                theme={this.state.theme}
-                points={this.state.points}
-                currentLevel={this.state.currentLevel}
-              />
-            </div>
-            );
+      <Header />
+      <MainScreen
+        renderedArray={renderedArray}
+        winOpacity={this.state.winOpacity}
+        loseOpacity={this.state.loseOpacity}
+        finalOpacity={this.state.finalOpacity}
+      />
+      <Scoreboard
+        theme={this.state.theme}
+        points={this.state.points}
+        currentLevel={this.state.currentLevel}
+      />
+    </div>
+    );
   }
 }
 
